@@ -33,6 +33,17 @@ export class DkeycomparisonComponent implements OnInit {
   username = '';
   password = '';
 
+  //Registierung
+  showRegister = false;
+  registerData = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    company: '',
+    admin: false,
+    active: false
+  }
+
   constructor(private participantsService: ParticipantsService, private fb: FormBuilder) {
   }
 
@@ -130,12 +141,22 @@ export class DkeycomparisonComponent implements OnInit {
     console.log("smartStandardEvaluationMethod: ", e.target.value)
   }
 
+  //Anmeldung eines Nutzer
   onSubmit(){
     if (!this.username || !this.password) {
       console.log('Fehlende Eingaben');
       return;
     }
+    //Session-Start bzw. Laden des Nutzer-Panel
   }
+
+  //Registrierung eines neuen Nutzers
+  onRegisterSubmit(){
+    console.log(this.registerData);
+    //Server-Anfrage oder E-Mail-Versand auslösen
+    this.showRegister = false;
+  }
+
 
 
 
@@ -144,6 +165,9 @@ export class DkeycomparisonComponent implements OnInit {
   handleEscape(event: KeyboardEvent) {
     if (this.showLogin) {
       this.showLogin = false;
+    }
+    if (this.showRegister) {
+      this.showRegister = false;
     }
   }
 

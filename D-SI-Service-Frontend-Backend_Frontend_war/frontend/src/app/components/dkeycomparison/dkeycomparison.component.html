@@ -1,37 +1,68 @@
 <div class="container comp">
   <h2 class="font-weight-bold  text-md-center  mb-5 p-4 rounded text-white d-comp w-100">D-Comparison</h2>
   <div class="title">
-  <h2 class="mc"><span>E = mc²</span></h2>
+    <h2 class="mc"><span>E = mc²</span></h2>
   </div>
 
   <!-- Login-Button -->
   <button class="btn-login btn btn-primary mt-1 w-auto sub" (click)="showLogin = true">Anmelden</button>
 
-<!--  Login-Popup-->
-<div class="modal-overlay" *ngIf="showLogin">
-  <div class="modal-content">
-    <h3>Anmelden</h3>
-    <form #loginForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
-      <div>
-        <label for="username">Benutzername:</label>
-        <input id="username" type="text" name="username" required [(ngModel)]="username" #usernameInput="ngModel">
-        <div class="error" *ngIf="usernameInput.invalid && usernameInput.touched">Benutzername ist erforderlich.</div>
-      </div>
-      <div>
-        <label for="password">Passwort:</label>
-        <input id="password" type="password" name="password" required [(ngModel)]="password" #passwordInput="ngModel">
-        <div class="error" *ngIf="passwordInput.invalid && passwordInput.touched">Passwort ist erforderlich.</div>
-      </div>
-      <button type="submit" class="btn btn-primary w-auto sub" [disabled]="loginForm.invalid">Einloggen</button>
-      <button type="button" class="btn btn-primary w-auto sub" (click)="showLogin = false">Abbrechen</button>
-      <div >
-        <p class="mt-3">Noch kein Account? <a href="">Registrieren</a></p>
-      </div>
+  <!--  Login-Popup-->
+  <div class="modal-overlay" *ngIf="showLogin">
+    <div class="modal-content">
+      <h3>Anmelden</h3>
+      <form #loginForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+        <div>
+          <label for="username">Benutzername:</label>
+          <input id="username" type="text" name="username" required [(ngModel)]="username" #usernameInput="ngModel">
+          <div class="error" *ngIf="usernameInput.invalid && usernameInput.touched">Benutzername ist erforderlich.</div>
+        </div>
+        <div>
+          <label for="password">Passwort:</label>
+          <input id="password" type="password" name="password" required [(ngModel)]="password" #passwordInput="ngModel">
+          <div class="error" *ngIf="passwordInput.invalid && passwordInput.touched">Passwort ist erforderlich.</div>
+        </div>
+        <button type="submit" class="btn btn-primary w-auto sub" [disabled]="loginForm.invalid">Einloggen</button>
+        <button type="button" class="btn btn-primary w-auto sub" (click)="showLogin = false">Abbrechen</button>
+        <div >
+          <p class="mt-3">Noch kein Account? <a href="#" (click)="showRegister = true; showLogin = false">Registrieren</a></p>
+        </div>
 
-    </form>
+      </form>
+    </div>
   </div>
-</div>
 
+  <!--Register-Pop-Up-->
+  <div class="modal-overlay" *ngIf="showRegister">
+    <div class="modal-content">
+     <h3>Registrieren</h3>
+      <form (ngSubmit)="onRegisterSubmit()" #registerForm="ngForm">
+        <div>
+          <label for="firstName">Vorname:</label>
+          <input id="firstName" type="text" name="firstName" required [(ngModel)]="registerData.firstName" #firstNameInput="ngModel">
+          <div *ngIf="firstNameInput.invalid && firstNameInput.touched" class="error">Vorname ist erforderlich.</div>
+        </div>
+        <div>
+          <label for="lastName">Nachname:</label>
+          <input id="lastName" type="text" name="lastName" required [(ngModel)]="registerData.lastName" #lastNameInput="ngModel">
+          <div *ngIf="lastNameInput.invalid && lastNameInput.touched" class="error">Nachname ist erforderlich.</div>
+        </div>
+        <div>
+          <label for="company">Unternehmen:</label>
+          <input id="company" type="text" name="company" required [(ngModel)]="registerData.company" #companyInput="ngModel">
+          <div *ngIf="companyInput.invalid && companyInput.touched" class="error">Unternehmen ist erforderlich.</div>
+        </div>
+        <div>
+          <label for="email">E-Mail:</label>
+          <input id="email" type="email" name="email" required [(ngModel)]="registerData.email" #emailInput="ngModel">
+          <div *ngIf="emailInput.invalid && emailInput.touched" class="error">E-Mail-Adresse ist erforderlich.</div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-auto sub" [disabled]="!registerForm.valid">Senden</button>
+        <button type="button" class="btn btn-primary w-auto sub" (click)="showRegister = false">Abbrechen</button>
+      </form>
+    </div>
+  </div>
 
 
   <div *ngIf="participantFormGroup"> <!-- Formular wird nur angezeigt, wenn participantFormGroup-Objekt existiert -->
@@ -61,7 +92,7 @@
           class="text-danger">PID DCC is required</small>
       </div>
       <div class="col text-center">
-        <button class="btn btn-primary mt-5 w-auto sub" [disabled]="this.participantFormGroup.invalid" type="submit">ADD
+        <button class="btn btn-primary mt-2 w-auto sub" [disabled]="this.participantFormGroup.invalid" type="submit">ADD
           PARTICIPANT
         </button>
       </div>
@@ -139,7 +170,7 @@
             </div>
           </div>
           <div class="col text-center form-group">
-            <button [disabled]="this.reportFormGroup.invalid" style="background-color:#009cd1; border-color:#009cd1;"
+            <button [disabled]="this.reportFormGroup.invalid"
                     class="btn btn-danger" type="submit" (click)="onDownload()">
               EVALUATE COMPARISON
             </button>
@@ -147,7 +178,7 @@
         </div>
       </form>
       <div class="col text-center form-group">
-        <a style="background-color:#009cd1; border-color:#009cd1;" class="btn btn-danger" type="submit"
+        <a class="btn btn-danger" type="submit"
            href="https://d-si.ptb.de/api/d-comparison/swagger-ui/index.html#" target="_blank">
           Swagger UI OpenAPI
         </a>
