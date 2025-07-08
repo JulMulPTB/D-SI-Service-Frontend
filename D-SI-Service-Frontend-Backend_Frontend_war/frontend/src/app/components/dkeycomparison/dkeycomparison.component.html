@@ -1,14 +1,42 @@
 <div class="container comp">
-  <h2 class="font-weight-bold m-lg-2 text-md-center mb-3 mt-5 rounded text-white d-comp ">D-Comparison</h2>
-  <div>
-    <h2 class="mc"><span>E = mc²</span></h2>
+  <h2 class="font-weight-bold  text-md-center  mb-5 p-4 rounded text-white d-comp w-100">D-Comparison</h2>
+  <div class="title">
+  <h2 class="mc"><span>E = mc²</span></h2>
   </div>
+
+  <!-- Login-Button -->
+  <button class="btn-login btn btn-primary mt-1 w-auto sub" (click)="showLogin = true">Anmelden</button>
+
+<!--  Login-Popup-->
+<div class="modal-overlay" *ngIf="showLogin">
+  <div class="modal-content">
+    <h3>Anmelden</h3>
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+      <div>
+        <label for="username">Benutzername:</label>
+        <input id="username" type="text" name="username" required [(ngModel)]="username" #usernameInput="ngModel">
+        <div class="error" *ngIf="usernameInput.invalid && usernameInput.touched">Benutzername ist erforderlich.</div>
+      </div>
+      <div>
+        <label for="password">Passwort:</label>
+        <input id="password" type="password" name="password" required [(ngModel)]="password" #passwordInput="ngModel">
+        <div class="error" *ngIf="passwordInput.invalid && passwordInput.touched">Passwort ist erforderlich.</div>
+      </div>
+      <button type="submit" class="btn btn-primary w-auto sub" [disabled]="loginForm.invalid">Einloggen</button>
+      <button type="button" class="btn btn-primary w-auto sub" (click)="showLogin = false">Abbrechen</button>
+      <div >
+        <p class="mt-3">Noch kein Account? <a href="">Registrieren</a></p>
+      </div>
+
+    </form>
+  </div>
+</div>
 
 
 
   <div *ngIf="participantFormGroup"> <!-- Formular wird nur angezeigt, wenn participantFormGroup-Objekt existiert -->
     <!--Reactive Form-->
-    <form class="col card p-3 mt-5 mb-5" [formGroup]="participantFormGroup" (ngSubmit)="addParticipant()"> <!--Das Formular wird an ein Form-Group-Objekt in der Component-Klasse gebunden -->
+    <form class="col card p-3 mt-3 mb-5" [formGroup]="participantFormGroup" (ngSubmit)="addParticipant()"> <!--Das Formular wird an ein Form-Group-Objekt in der Component-Klasse gebunden -->
       <div class="form-group mb-2">
         <legend>Participant:</legend>
         <label class="form-label" for="name"> Name:</label>

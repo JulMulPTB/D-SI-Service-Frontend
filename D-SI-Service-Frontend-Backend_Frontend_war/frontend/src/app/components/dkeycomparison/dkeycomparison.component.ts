@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, HostListener} from '@angular/core';
 import {ParticipantsService} from "../../services/participants.service";
 import {Participant} from "../../model/participant.model";
 import {
@@ -27,6 +27,11 @@ export class DkeycomparisonComponent implements OnInit {
   reportFormGroup?: FormGroup<any>;
   searchText: any;
   selectedOption: string = "";
+
+  //Login-Implementierung:
+  showLogin = false;
+  username = '';
+  password = '';
 
   constructor(private participantsService: ParticipantsService, private fb: FormBuilder) {
   }
@@ -124,6 +129,25 @@ export class DkeycomparisonComponent implements OnInit {
   selectedEvalMethod(e: any) {
     console.log("smartStandardEvaluationMethod: ", e.target.value)
   }
+
+  onSubmit(){
+    if (!this.username || !this.password) {
+      console.log('Fehlende Eingaben');
+      return;
+    }
+  }
+
+
+
+  //Pop-Up über ESC schließen
+  @HostListener('document:keydown.escape', ['$event'])
+  handleEscape(event: KeyboardEvent) {
+    if (this.showLogin) {
+      this.showLogin = false;
+    }
+  }
+
+
 }
 
 
