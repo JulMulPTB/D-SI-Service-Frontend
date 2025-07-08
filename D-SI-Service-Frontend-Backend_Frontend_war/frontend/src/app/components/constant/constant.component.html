@@ -1,0 +1,54 @@
+<div class="container const ">
+  <h2 class="font-weight-bold text-md-center mb-5 rounded text-white d-const">D-Constant</h2>
+
+  <!--  Search form-->
+  <form>
+    <div class="input-group">
+      <label class="input-group-text ">Search</label>
+      <input class="bi-search  input-group-text bg-light search" type="text"
+             placeholder="search constants " name="search" [(ngModel)]="searchText">
+    </div>
+  </form>
+  <!--  Constants table-->
+  <div class="container " *ngIf="!constant">
+    <ng-container *ngIf="constants$ | async as result" [ngSwitch]="result.dataState">
+      <ng-container *ngSwitchCase="DataStateEnum.LOADING">Loading...</ng-container>
+      <ng-container *ngSwitchCase="DataStateEnum.ERROR">
+        <div class="alert-danger">{{result.errorMessage}}</div>
+      </ng-container>
+      <ng-container *ngSwitchCase="DataStateEnum.LOADED" class="display: flex">
+        <div class=" card col p-3 mt-5 mb-5 table-responsive ">
+          <div class="card-header input-group-text bg-light ">Constant list</div>
+          <div class="card-body ">
+            <table class="table table-striped table-bordered mb-xl-5 resize-handle data-resizable">
+              <thead>
+              <tr>
+                <th>Name (label)</th>
+                <th>Value</th>
+                <th>D-SI Unit</th>
+                <th>D-SI XML</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td *ngIf="!result.data?.length" colspan="5">No constants!</td>
+              <tr *ngFor="let constant of result.data | filter:searchText">
+                <td>{{constant.label}}</td>
+                <td>{{constant.value}}</td>
+                <td>{{constant.unit}}</td>
+                <td><a href="https://d-si.ptb.de/api/d-constant/{{constant.label}}{{constant.year}}"
+                       target="_blank">{{constant.label}}{{constant.year}}</a></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+    <div class="col text-center form-group">
+      <a class="btn btn-primary swagger" type="submit"
+         href="https://d-si.ptb.de/api/d-constant/swagger-ui/index.html#" target="_blank">Swagger UI OpenAPI</a>
+    </div>
+  </div>
+</div>
+

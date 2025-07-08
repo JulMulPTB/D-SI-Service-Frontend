@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="CodataApi:war">
+    <output-path>$PROJECT_DIR$/backend/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>CodataApi</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="dsi-client.war">
+      <element id="artifact" artifact-name="CodataApi:war exploded" />
+    </root>
+  </artifact>
+</component>
