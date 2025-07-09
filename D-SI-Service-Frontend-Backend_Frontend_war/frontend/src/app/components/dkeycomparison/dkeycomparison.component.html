@@ -1,54 +1,36 @@
 <div class="container comp" >
 
   <!--  Öffentliches Panel-->
-  <div class="public-panel" *ngIf="!adminSignedIn">
+  <div class="public-panel" *ngIf="!adminSignedIn && !coordinatorSignedIn">
     <h2 class="font-weight-bold  text-md-center p-4 mb-5 rounded text-white d-comp w-100">D-Comparison</h2>
     <div class="title">
       <h2 class="mc"><span>E = mc²</span></h2>
     </div>
     <!-- Login-Button vor Anmeldung -->
-    <button class="btn-login btn btn-primary mt-1 w-auto sub" (click)="showLogin = true" *ngIf="!adminSignedIn">Anmelden</button>
-  </div>
-
-  <!-- Admin-Panel Tabs -->
-  <div class="admin-pan" *ngIf="adminSignedIn">
-
-      <h2 class=" header-with-logout font-weight-bold text-md-center p-4 text-white d-comp w-100">
-        <span>Admin-Panel ({{username}})</span>
-        <button class="logout-btn" (click)="onLogout()">Logout</button>
-      </h2>
-    <div class="admin-nav">
-      <nav>
-        <ul class="nav-list">
-          <li class="nav-item" (click)="onEvaluate()" [ngClass]="{ 'active': evaluateActive }">Evaluate</li>
-          <li class="nav-item" (click)="onDccList()"  [ngClass]="{ 'active': dccListActive }">DCC-Liste</li>
-          <li class="nav-item" (click)="onUserList()" [ngClass]="{ 'active': userListActive }">User-Liste</li>
-        </ul>
-      </nav>
-    </div>
+    <button class="btn-login btn btn-primary mt-1 w-auto sub" (click)="showLogin = true" *ngIf="!adminSignedIn">Sign In</button>
   </div>
 
   <!--  Login-Popup-->
   <div class="modal-overlay" *ngIf="showLogin">
     <div class="modal-content">
-      <h3>Anmelden</h3>
+      <h3>Sign In</h3>
       <form #loginForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
         <div>
-          <label for="username">Benutzername:</label>
+          <label for="username">Username:</label>
           <input id="username" type="text" name="username" required [(ngModel)]="username" #usernameInput="ngModel">
-          <div class="error" *ngIf="usernameInput.invalid && usernameInput.touched">Benutzername ist erforderlich.</div>
+          <div class="error" *ngIf="usernameInput.invalid && usernameInput.touched">Username is required.</div>
         </div>
         <div>
-          <label for="password">Passwort:</label>
+          <label for="password">Password:</label>
           <input id="password" type="password" name="password" required [(ngModel)]="password" #passwordInput="ngModel">
-          <div class="error" *ngIf="passwordInput.invalid && passwordInput.touched">Passwort ist erforderlich.</div>
+          <div class="error" *ngIf="passwordInput.invalid && passwordInput.touched">Password is required.</div>
         </div>
         <div class="button-row">
-          <button type="submit" class="btn btn-primary w-auto sub" [disabled]="loginForm.invalid">Einloggen</button>
-          <button type="button" class="btn btn-primary w-auto sub" (click)="showLogin = false">Abbrechen</button>
+          <button type="submit" class="btn btn-primary w-auto sub" [disabled]="loginForm.invalid">Sign in</button>
+          <button type="button" class="btn btn-primary w-auto sub" (click)="showLogin = false">Cancel</button>
         </div>
         <div >
-          <p class="mt-3">Noch kein Account? <a href="#" (click)="showRegister = true; showLogin = false">Registrierungsanfrage senden</a></p>
+          <p class="mt-3">No account yet? <a href="#" (click)="showRegister = true; showLogin = false">Send registration request</a></p>
         </div>
 
       </form>
@@ -58,7 +40,7 @@
   <!--Register-Pop-Up-->
   <div class="modal-overlay" *ngIf="showRegister">
     <div class="modal-content">
-     <h3>Registrieren</h3>
+     <h3>Sign up</h3>
       <form (ngSubmit)="onRegisterSubmit()" #registerForm="ngForm">
         <div>
           <label for="firstName">Vorname:</label>
@@ -87,6 +69,38 @@
     </div>
   </div>
 
+  <!-- Admin-Panel Tabs -->
+  <div class="admin-pan mb-5" *ngIf="adminSignedIn">
+    <h2 class=" header-with-logout font-weight-bold text-md-center p-4 text-white d-comp w-100">
+      <span class="mr-5">Admin-Panel ({{username}})</span>
+      <button class="logout-btn" (click)="onLogout()">Logout</button>
+    </h2>
+    <div class="panel-nav">
+      <nav>
+        <ul class="nav-list">
+          <li class="nav-item" (click)="onEvaluate()" [ngClass]="{ 'active': evaluateActive }">Evaluate</li>
+          <li class="nav-item" (click)="onDccList()"  [ngClass]="{ 'active': dccListActive }">DCC-List</li>
+          <li class="nav-item" (click)="onUserList()" [ngClass]="{ 'active': userListActive }">User-List</li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Koordinator-Panel-Tabs -->
+  <div class="coordinator-pan mb-5" *ngIf="coordinatorSignedIn">
+    <h2 class=" header-with-logout font-weight-bold text-md-center p-4 text-white d-comp w-100">
+      <span class="mr-5">Coordinator-Panel ({{username}})</span>
+      <button class="logout-btn" (click)="onLogout()">Logout</button>
+    </h2>
+    <div class="panel-nav">
+      <nav>
+        <ul class="nav-list">
+          <li class="nav-item" (click)="onEvaluate()" [ngClass]="{ 'active': evaluateActive }">Evaluate</li>
+          <li class="nav-item" (click)="onDccList()"  [ngClass]="{ 'active': dccListActive }">DCC-List</li>
+        </ul>
+      </nav>
+    </div>
+  </div>
 
 
 
@@ -220,7 +234,7 @@
   <!--DCC-Liste-->
   <section class="dcc-list" *ngIf="dccListActive">
     <div>
-      <h2>DCC-Liste</h2>
+<!--      <h2 >DCC-Liste</h2>-->
       <button class="btn btn-primary mt-1 w-auto sub" (click)="showDccUpload = true">&#8593; Upload DCC</button>
       <table class="panel-table mt-3">
         <thead >
@@ -243,9 +257,9 @@
             <td>admin</td>
             <td>fejergojOJROKGROGK'r</td>
             <td>
-              <button  (click)="editDCC()">Bearbeiten</button>
-              <button  (click)="deleteDCC()">Löschen</button>
-              <button  (click)="viewXML()">XML</button>
+              <button class="btn-classic"  (click)="editDCC()">Edit</button>
+              <button class="btn-classic"   (click)="deleteDCC()">Delete</button>
+              <button class="btn-classic" (click)="viewXML()">XML</button>
             </td>
           </tr>
         </tbody>
@@ -254,20 +268,20 @@
       <!-- Pop-Up für DCC-Upload-->
       <div class="modal-overlay" *ngIf="showDccUpload">
         <div class="modal-content">
-          <h2>DCC hinzufügen</h2>
+          <h2>Add new DCC </h2>
           <label>Valid: </label>
           <input type="text" id="dccValid">
           <label>PID: </label>
           <input type="text" id="dccPid">
           <label>Status: </label>
           <input type="text" id="dccStatus">
-          <label>Rolle: </label>
+          <label>User-Role: </label>
           <input type="text" id="dccRolle">
           <label>XML: </label>
           <input type="file">
           <div class="button-row">
-            <button class="btn btn-primary w-auto sub" (click)="onUploadDcc()">Hochladen</button>
-            <button class="btn btn-primary w-auto sub" (click)="showDccUpload = false">Abbrechen</button>
+            <button class="btn btn-primary w-auto sub" (click)="onUploadDcc()">Upload</button>
+            <button class="btn btn-primary w-auto sub" (click)="showDccUpload = false">Cancel</button>
           </div>
         </div>
       </div>
@@ -279,26 +293,26 @@
 
   <!--User-Liste-->
   <section class="user-list" *ngIf="userListActive">
-    <h2>User-Liste</h2>
-    <button class="btn btn-primary mt-1 w-auto sub">+ User hinzufügen</button>
+<!--    <h2>User-List</h2>-->
+    <button class="btn btn-primary mt-1 w-auto sub">+ Add User</button>
     <table class="panel-table mt-3">
       <thead>
         <tr>
           <th>User</th>
           <th>E-Mail</th>
-          <th>Rolle</th>
-          <th>Aktiv</th>
-          <th>Aktionen</th>
+          <th>User Role</th>
+          <th>Active</th>
+          <th>Actions</th>
         </tr>
       </thead>
         <tr>
           <td>Julian</td>
           <td>juls@web.de</td>
           <td>Admin</td>
-          <td><button>Aktiv</button></td>
+          <td><button class="btn-classic">Active</button></td>
           <td>
-            <button>Bearbeiten</button>
-            <button>Löschen</button>
+            <button class="btn-classic">Edit</button>
+            <button class="btn-classic">Delete</button>
           </td>
         </tr>
       <tbody>

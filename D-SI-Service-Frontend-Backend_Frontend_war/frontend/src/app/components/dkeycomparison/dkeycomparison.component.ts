@@ -33,14 +33,18 @@ export class DkeycomparisonComponent implements OnInit {
   username = '';
   password = '';
   adminSignedIn = false;
+  coordinatorSignedIn = false;
 
   //Navigation
   evaluateActive = true;
   dccListActive = false;
   userListActive = false;
 
-  //DCC-List
+  //DCC-List Admin
   showDccUpload = false;
+
+  //Koordinator-Panel
+
 
 
 
@@ -155,8 +159,14 @@ export class DkeycomparisonComponent implements OnInit {
   //Anmeldung eines Nutzer
   onSubmit(){
     //Zum testweisen Laden des Admin-Panels über die GUI
-    if (this.username === "admin" && this.password === "passwort"){
+    if (this.username === "admin" && this.password === "password"){
       this.adminSignedIn = true;
+    }
+    else if (this.username === "coordinator" && this.password === "password"){
+      this.coordinatorSignedIn = true;
+    }
+    else {
+      alert("Invalid username or password");
     }
     //Session-Start bzw. Laden des Nutzer-Panel
 
@@ -174,6 +184,7 @@ export class DkeycomparisonComponent implements OnInit {
   //Logout User
   onLogout() {
     this.adminSignedIn = false;
+    this.coordinatorSignedIn =false;
     this.evaluateActive = true;
     this.userListActive = false;
     this.dccListActive = false;
