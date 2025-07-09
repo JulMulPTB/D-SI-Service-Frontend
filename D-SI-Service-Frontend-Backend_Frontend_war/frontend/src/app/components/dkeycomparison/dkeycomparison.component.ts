@@ -32,6 +32,17 @@ export class DkeycomparisonComponent implements OnInit {
   showLogin = false;
   username = '';
   password = '';
+  adminSignedIn = false;
+
+  //Navigation
+  evaluateActive = true;
+  dccListActive = false;
+  userListActive = false;
+
+  //DCC-List
+  showDccUpload = false;
+
+
 
   //Registierung
   showRegister = false;
@@ -143,11 +154,14 @@ export class DkeycomparisonComponent implements OnInit {
 
   //Anmeldung eines Nutzer
   onSubmit(){
-    if (!this.username || !this.password) {
-      console.log('Fehlende Eingaben');
-      return;
+    //Zum testweisen Laden des Admin-Panels über die GUI
+    if (this.username === "admin" && this.password === "passwort"){
+      this.adminSignedIn = true;
     }
     //Session-Start bzw. Laden des Nutzer-Panel
+
+    //Login-Fenster schließen
+    this.showLogin = false;
   }
 
   //Registrierung eines neuen Nutzers
@@ -157,7 +171,13 @@ export class DkeycomparisonComponent implements OnInit {
     this.showRegister = false;
   }
 
-
+  //Logout User
+  onLogout() {
+    this.adminSignedIn = false;
+    this.evaluateActive = true;
+    this.userListActive = false;
+    this.dccListActive = false;
+  }
 
 
   //Pop-Up über ESC schließen
@@ -172,6 +192,42 @@ export class DkeycomparisonComponent implements OnInit {
   }
 
 
+  onEvaluate() {
+    this.evaluateActive = true;
+    this.dccListActive = false;
+    this.userListActive = false;
+  }
+  onDccList() {
+    this.evaluateActive = false;
+    this.dccListActive = true;
+    this.userListActive = false;
+  }
+
+  onUserList() {
+    this.evaluateActive = false;
+    this.dccListActive = false;
+    this.userListActive = true;
+  }
+
+  editDCC() {
+
+  }
+
+  deleteDCC() {
+
+  }
+
+  viewXML() {
+
+  }
+
+  onClosePopup() {
+
+  }
+
+  onUploadDcc() {
+
+  }
 }
 
 

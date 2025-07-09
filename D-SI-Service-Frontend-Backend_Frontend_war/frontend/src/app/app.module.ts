@@ -18,6 +18,7 @@ import { DsiconverterComponent } from './components/dsiconverter/dsiconverter.co
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +29,7 @@ import { DsiconverterComponent } from './components/dsiconverter/dsiconverter.co
     FooterComponent,
     ErrorComponent,
     SawaggerComponent,
-    DsiconverterComponent,
+    DsiconverterComponent
   ],
   imports: [
     BrowserModule,

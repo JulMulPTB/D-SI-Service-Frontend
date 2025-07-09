@@ -31,21 +31,55 @@
   text-align: center;
 }
 
+.public-panel, .admin-pan {
+
+}
+
+
 /* Button-Styling */
-.btn-login, .btn.btn-primary, .btn.btn-danger {
+.btn-login, .btn.btn-primary, .btn.btn-danger, .btn-upload {
   color: white;
-  background-color:#009cd1;
+  font-weight: bold;
+  background: linear-gradient(to right, #009cd1, #50bed6);
+  /*background-color:#009cd1;*/
   border-color: #009cd1;
   border-radius: 50px;
   padding: 0.5rem 1.5rem;
-
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
+
 .btn-login:hover,
 .btn.btn-primary:hover,
 .btn.btn-danger:hover {
-  background-color: #007bb5;
+  /*background-color: #007bb5;*/
+  background: linear-gradient(to right, #007bb5, #40abc8);
+  transform: scale(1.05);
 }
 
+.logout-btn {
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: #d0f0ff;
+  transform: scale(1.05);
+}
+
+.button-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
 
 /* Pop-Up-Fenster */
 .modal-overlay {
@@ -95,5 +129,81 @@
     color: red;
     font-size: 0.9rem;
     margin-top: 0.25rem;
+}
+
+/* Admin-Panel */
+.admin-nav {
+  color: white;
+  font-size: 1.5rem;
+  background-color: #009cd1;
+  padding: 0.5rem 1rem;
+  border-radius: 0 0 0.5rem 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  flex: 1; /* gleicher Platz für jedes Element */
+  text-align: center;
+  padding: 0.5rem 0;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.nav-item:hover {
+  /*color: #d0f0ff; !* Helleres Blau beim Hover *!*/
+  background-color: #50BED6;
+}
+
+/* mit Class-Binding*/
+.nav-item.active {
+  background-color: #50BED6;
+}
+
+.header-with-logout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.1rem;
+  padding: 1rem;
+  background-color: #009cd1;
+  color: white;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.panel-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 0.75rem;
+}
+
+thead {
+  background-color: #009cd1;
+  color: white;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+  background-color: #e6f7fb;
+}
+
+td button {
+  margin: 0.2rem;
 }
 

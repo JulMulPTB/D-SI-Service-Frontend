@@ -11,7 +11,7 @@ const routes: Routes = [
   {path: "", component: HomeComponent},
   {path: "d-constant", component: ConstantComponent},
   {path: "home", component: HomeComponent},
-  {path: "d-comparison", component: DkeycomparisonComponent},
+  { path: "d-comparison", component: DkeycomparisonComponent},
   {path: "dsi-converter", component: DsiconverterComponent},
   { path: 'error', component: ErrorComponent },
 ];
